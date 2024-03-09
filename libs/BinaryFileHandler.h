@@ -19,6 +19,7 @@ struct BinaryFileHandler {
     bool writeBinaryFile(List<T> list) {
 
         fstream file;
+        
 
         return true;
     }
