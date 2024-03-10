@@ -43,7 +43,7 @@ struct TextFileHandler {
 
         fstream file;
 
-        file.open(fileName, mode);
+        file.open(fileName, ios::out);
 
         if (file.fail()) {
             return false;
@@ -68,7 +68,7 @@ struct TextFileHandler {
 
         fstream file;
 
-        file.open(fileName, mode);
+        file.open(fileName, ios::out | ios::app);
 
         if (file.fail()) {
             return false;

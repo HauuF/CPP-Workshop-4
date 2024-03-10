@@ -17,8 +17,17 @@ struct BinaryFileHandler {
     }
     
     bool writeBinaryFile(List<T> list) {
-
         fstream file;
+        file.open(fileName, ios::out | ios::binary);
+
+        if (file.fail()) {
+            return false;
+        }
+        for (int i = 0; i < list.size; i++) {
+        T element = list.get(i);
+        file.write((char*)&element, sizeof(element));
+    }
+    file.close();
 
         return true;
     }
@@ -28,17 +37,31 @@ struct BinaryFileHandler {
         List<T> list;
 
         fstream file;
-       
+        file.open(fileName, ios::in | ios::binary);
 
+        if (file.fail()) {
+            return list;
+        }
+        T element;
+        while (file.read(reinterpret_cast<char *>(&element), sizeof(element))) {
+            list.add(element);
+        }
 
+        file.close();
         return list;
     }
 
     bool appendElementToFile(T element) {
         
-        fstream file;
+            fstream file;
+        file.open(fileName, ios::out | ios::binary | ios::app);
 
+        if (file.fail()) {
+            return false;
+        }
 
+        file.write(reinterpret_cast<char *>(&element), sizeof(element));
+        file.close();
         return true;
     }
 
