@@ -8,6 +8,7 @@
 using namespace std;
 
 template <typename T>
+
 struct BinaryFileHandler {
 
     string fileName;
